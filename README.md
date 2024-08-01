@@ -36,18 +36,18 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 # This project was made taking account this considerations:
 
 ```bash
-Build a single button that allows you to upload files <=5MB to Vercel’s blob storage.
-call a third party API (example.com) when the upload begins
-call a third party API (example.com) when the upload succeeds
-call a third party API (example.com) when the upload fails
-If the file is >5MB please show a modal that rejects
-After the upload is complete, show a list of links of all uploaded files such that you can download them again.
-Put a pencil icon to each link in the list to rename the file. A modal with Save and Cancel buttons should open for the rename.
-Show a skeleton instead of the list of files when the list is still loading.
-add some fake delay if it loads too fast just to show the effect.
-Put a trash icon next to each link in the list so that you can delete it.
-Ensure there are error boundaries in case anything errors and you show some kind of error UI.
-When you refresh the whole page, the entire state should persist.
+-Build a single button that allows you to upload files <=5MB to Vercel’s blob storage.
+  +call a third party API (example.com) when the upload begins
+  +call a third party API (example.com) when the upload succeeds
+  +call a third party API (example.com) when the upload fails
+  +If the file is >5MB please show a modal that rejects
+-After the upload is complete, show a list of links of all uploaded files such that you can download them again.
+-Put a pencil icon to each link in the list to rename the file. A modal with Save and Cancel buttons should open for the rename.
+-Show a skeleton instead of the list of files when the list is still loading.
+-add some fake delay if it loads too fast just to show the effect.
+-Put a trash icon next to each link in the list so that you can delete it.
+-Ensure there are error boundaries in case anything errors and you show some kind of error UI.
+-When you refresh the whole page, the entire state should persist.
 
 Libraries:
 
