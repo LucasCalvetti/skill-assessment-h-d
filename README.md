@@ -36,6 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 # This project was made taking account this considerations:
 
 ```bash
+/*
 -Build a single button that allows you to upload files <=5MB to Vercel’s blob storage.
   +call a third party API (example.com) when the upload begins
   +call a third party API (example.com) when the upload succeeds
@@ -58,6 +59,7 @@ Make a Git repository to track your code changes in commits
 Deploy to Vercel
 
 Write brief documentation as a Readme.md at the root to flag anything you might find relevant for a new contributor
+*/
 ```
 
 Thank you very much.
