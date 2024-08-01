@@ -1,65 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# Getting Started
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project was created as a skills assessment with Next.js for Hire Digital. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The idea of this app is to allow users to upload files smaller than 5MB to virtual storage on Vercel and to view, edit, and delete them in a simple and user-friendly manner.
 
-## For new contributors
+## For New Contributors
 
-# Step by step guide:
+### Step-by-Step Guide
 
-- Fork this repository
-- Login on [Vercel](https://vercel.com/) and if you don't have an account create one.
-- In Vercel's Dashboard go to this forked project and connect your git repository it.
-- On the project go to storage and Create Database>Blob and create a database.
-- Open the project with Visual Studio Code or any code editor that you use and paste 'vercel env pull .env.development.local'
-- It must have created a file named ".env.development.local"
-  + Optionally you can add an env variable called BLOB_READ_WRITE_TOKEN="your token" where you can find your token in vercels plataform>this forked project>settings>enviromental variables and you should see it there.
-- In the console paste "npm run dev" and open the server.
+1. Fork this repository.
+2. Log in to [Vercel](https://vercel.com/), and if you don't have an account, create one.
+3. In Vercel's Dashboard, go to this forked project and connect your Git repository to it.
+4. In the project settings, go to "Storage" and create a Blob database.
+5. Open the project with Visual Studio Code or any code editor you use and run `vercel env pull .env.development.local`.
+6. This should create a file named ".env.development.local".
+   - Optionally, you can add an environment variable called `BLOB_READ_WRITE_TOKEN="your token"`. You can find your token in Vercel's platform under the forked project settings in the "Environment Variables" section.
+7. In the console, run `npm run dev` and open the server.
 
-## Considerations:
+## Considerations
 
-- The edit button does not work perfectly because I didn't have enough time to make it work, but everything else should work fine.
+- I only had 12 hours to do this because I saw the email inviting me to this challenge quite late.
+- The edit button does not work perfectly because of time constraints, but everything else should function correctly.
 
-# This project was made taking account this considerations:
+### Project Requirements
 
 ```bash
-/*
--Build a single button that allows you to upload files <=5MB to Vercel’s blob storage.
-  +call a third party API (example.com) when the upload begins
-  +call a third party API (example.com) when the upload succeeds
-  +call a third party API (example.com) when the upload fails
-  +If the file is >5MB please show a modal that rejects
--After the upload is complete, show a list of links of all uploaded files such that you can download them again.
--Put a pencil icon to each link in the list to rename the file. A modal with Save and Cancel buttons should open for the rename.
--Show a skeleton instead of the list of files when the list is still loading.
--add some fake delay if it loads too fast just to show the effect.
--Put a trash icon next to each link in the list so that you can delete it.
--Ensure there are error boundaries in case anything errors and you show some kind of error UI.
--When you refresh the whole page, the entire state should persist.
-
-Libraries:
-
-Use shadcn/ui or Radix UI
-Use NextJs 14 with AppRouter and Server Actions
-Make a Git repository to track your code changes in commits
-
-Deploy to Vercel
-
-Write brief documentation as a Readme.md at the root to flag anything you might find relevant for a new contributor
-*/
+- Build a single button that allows users to upload files <=5MB to Vercel’s blob storage.
+  + Call a third-party API (example.com) when the upload begins.
+  + Call a third-party API (example.com) when the upload succeeds.
+  + Call a third-party API (example.com) when the upload fails.
+  + Show a modal if the file is >5MB, rejecting the upload.
+- After the upload is complete, display a list of links to all uploaded files so they can be downloaded again.
+- Add a pencil icon next to each link in the list to allow renaming the file. A modal with Save and Cancel buttons should open for renaming.
+- Display a skeleton loader while the list of files is loading.
+  - Add a fake delay if the list loads too quickly to demonstrate the effect.
+- Add a trash icon next to each link in the list to allow deletion of the file.
+- Implement error boundaries to handle any errors and display an error UI.
+- Ensure that the entire state persists when the page is refreshed.
+Libraries
+  - Use shadcn/ui or Radix UI.
+  - Use Next.js 14 with App Router and Server Actions.
+  - Create a Git repository to track code changes with commits.
+  - Deploy to Vercel.
+  - Write brief documentation as a README.md at the root to highlight anything relevant for new contributors.
 ```
 
-Thank you very much.
+
