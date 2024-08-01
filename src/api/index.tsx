@@ -1,6 +1,5 @@
 import { API_URL } from "@/constants";
 import { PutBlobResult } from "@vercel/blob";
-import { list } from "@vercel/blob";
 
 export async function uploadFile(file: File, apiUrl: string): Promise<Error[] | [null, PutBlobResult]> {
   const formData = new FormData();
