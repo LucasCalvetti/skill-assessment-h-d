@@ -1,54 +1,68 @@
 "use client";
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { APP_STATUS, UPLOADING_BUTTON_TEXT, API_URL, BEGIN_UPLOAD_API, SUCCESS_UPLOAD_API, FAILURE_UPLOAD_API } from "@/constants";
+import { APP_STATUS, UPLOADING_BUTTON_TEXT, API_URL } from "@/constants";
 import { type AppStatusType } from "@/types";
 import { uploadFile } from "@/api";
 import { toast } from "sonner";
+import { useBlobList } from "@/context/blobContext";
+import { useRouter } from "next/navigation";
 
 export function UploadForm() {
   const [file, setFile] = useState<File | null>(null);
+  const { blobList, setBlobList } = useBlobList();
   const [appStatus, setAppStatus] = useState<AppStatusType>(APP_STATUS.IDLE);
+  const router = useRouter(); // Use router here
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) {
-      //TODO: error management here
-      return console.log("No file selected");
+    const selectedFile = event.target.files?.[0];
+    if (!selectedFile) {
+      toast.error("No file selected");
+      return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-      //TODO: error management here
-      return console.log("File too big");
+    if (selectedFile.size > 5 * 1024 * 1024) {
+      // 5MB
+      toast.error("File size must be less than 5MB");
+      return;
     }
-    setFile(file);
+    //Here you would call the API for an start-uploading message http://example.com/start-upload
+    setFile(selectedFile);
     setAppStatus(APP_STATUS.READY_UPLOAD);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (appStatus != APP_STATUS.READY_UPLOAD || !file) {
-      //TODO: error management here
+    if (appStatus !== APP_STATUS.READY_UPLOAD || !file) {
+      toast.error("Select a file to upload");
       return;
     }
     setAppStatus(APP_STATUS.UPLOADING);
-    const [err, result] = await uploadFile(file, API_URL);
+    const [err, newBlob] = await uploadFile(file, API_URL + `/api/file?filename=${file.name}`);
     if (err) {
       setAppStatus(APP_STATUS.ERROR);
+      //Here you would call the API for an error message http://example.com/fail-upload
       toast.error(err.message);
       return;
     }
-    setAppStatus(APP_STATUS.READY_USAGE);
-    toast.success("File uploaded successfully");
+    if (!(newBlob instanceof Error)) {
+      setBlobList([...blobList, newBlob]); // Update the blob list
+      //Here you would call the API for an success message http://example.com/success
+      toast.success(`File ${file.name} uploaded successfully`);
+      setAppStatus(APP_STATUS.IDLE);
+      setFile(null);
+    }
   };
 
   const showButtonFlag = appStatus === APP_STATUS.READY_UPLOAD || appStatus === APP_STATUS.UPLOADING;
+
   return (
     <form className="flex flex-col" onSubmit={handleSubmit}>
       <label className="block mb-3">
-        <input disabled={appStatus == APP_STATUS.UPLOADING} type="file" onChange={handleInputChange} />
+        <input disabled={appStatus === APP_STATUS.UPLOADING} type="file" onChange={handleInputChange} />
       </label>
       {showButtonFlag && (
-        <Button disabled={appStatus == APP_STATUS.UPLOADING} variant={"secondary"}>
+        <Button disabled={appStatus === APP_STATUS.UPLOADING} variant="secondary">
           {UPLOADING_BUTTON_TEXT[appStatus]}
         </Button>
       )}
