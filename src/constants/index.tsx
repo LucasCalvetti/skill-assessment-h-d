@@ -14,7 +14,7 @@ export const UPLOADING_BUTTON_TEXT = {
 } as const;
 
 //API url vercel
-export const API_URL = "https://www.postb.in/1722475618549-5473569461610";
+export const API_URL = "http://localhost:3000/";
 
 //Fake APIs
 export const BEGIN_UPLOAD_API = "https://example.com/begin-upload";
